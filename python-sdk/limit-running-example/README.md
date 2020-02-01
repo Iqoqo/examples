@@ -10,7 +10,7 @@ disco sdk, which can be installed by running:
 
 ## Config
 - Change the max_running_jobs param at the top of the file to your desired maxium running jobs
-- Change the job_type param at the top of the file to your desired job size (See disco documentation for the instance types)
+- Change the job_type param at the top of the file to your desired job size (See disco documentation for instance types options)
 
 ## Usage Example
 `$ python main.py spawn --name "NewJob" --script "/home/user/python_script.py"`
