@@ -3,10 +3,9 @@ import argparse
 import disco
 import os
 import pathlib
-from disco import Job
 
 """TOP CONFIG"""
-job_type = 'sg'
+job_type = 's'
 max_running_jobs = 4
 
 
@@ -25,9 +24,9 @@ def check_environ():
             print(f'please export {k}')
             fail = True
     if not fail:
-        disco.set_credentials(os.environ['DISCO_EMAIL'],
-                              os.environ['DISCO_PASSWORD'],
-                              save_to_dot_file=True)
+        disco.core.Credentials.update(os.environ['DISCO_EMAIL'],
+                                      os.environ['DISCO_PASSWORD'],
+                                      save_to_config=True)
     print(f'Check environment {"Failed" if fail else "OK"}')
     return not fail
 
@@ -38,11 +37,8 @@ def get_current_running_count():
     A running job is either queued (started and waiting for free resources)
     or actually running (agent is currently running the job)
     """
-    statuses = disco.job.jobs_summary()
-    for s in statuses:
-        if s['status'] == disco.constants.JobStatus.working.value:
-            return s['count']
-    return 0
+    statuses = disco.Job.jobs_summary()
+    return statuses['Working']
 
 
 def upload_job_script(script_file_path: str):
@@ -67,25 +63,13 @@ def add_job(script_file_id: str, job_name: str):
     """
     print("Trying to add job: {}...".format(job_name))
     try:
-        return disco.Job.add(script_file_id,
-                             cluster_instance_type=job_type,
-                             job_name=job_name)
+        return disco.Job.create(script_file_id, job_name=job_name,
+                                cluster_instance_type=job_type)
     except Exception as err:
         alert_and_exit("Unable to add job {}: {}".format(job_name, err))
 
 
-def stop_job(job_id: str):
-    """
-    stops a running job
-    """
-    print("Trying to stop job: {}...".format(job_id))
-    try:
-        return disco.Job.stop(job_id)
-    except Exception as err:
-        alert_and_exit("Unable to add job {}: {}".format(job_id, err))
-
-
-def start_job(job: Job):
+def start_job(job: disco.Job):
     """
     This will actually run the job (or queue it, depending on available resources)
     """
@@ -97,7 +81,7 @@ def start_job(job: Job):
         alert_and_exit("Unable to start job {}: {}".format(job, err))
 
 
-def get_tasks(job: Job):
+def get_tasks(job: disco.Job):
     """
     This will return an array of tasks
     A job can contain multiple tasks
@@ -117,11 +101,12 @@ def get_running_jobs(limit=10):
     This will return an array of running jobs
     limited to the default of 10
     """
+    print("Getting running jobs...")
     running_jobs = []
     try:
-        all_jobs = disco.list_jobs(limit=limit)
+        all_jobs = disco.Job.list_jobs(limit=limit)
         for job in all_jobs:
-            if job['status'] == disco.constants.JobStatus.working.value:
+            if job.status == 'Working':
                 running_jobs.append(job)
         return running_jobs
     except Exception as err:
@@ -141,7 +126,8 @@ def spawn_job(job_name, job_script):
         script_file_id = upload_job_script(job_script)
         # Add the job
         job = add_job(script_file_id, job_name)
-        job_id = disco.Job.get_details(job)['job']['id']
+        job_id = disco.Job.get_details(job)
+        print(job_id)
         # Start the job
         start_job(job)
         # List the job tasks
@@ -167,7 +153,7 @@ def main():
     args = parser.parse_args()
 
     """Required Credentials"""
-    os.environ['DISCO_EMAIL'] = "your_disco_username"
+    os.environ['DISCO_EMAIL'] = "your_disco_user"
     os.environ['DISCO_PASSWORD'] = "your_disco_password"
 
     """Main Event"""
@@ -177,7 +163,7 @@ def main():
             spawn_job(job_name=args.name, job_script=args.script)
         elif args.command == 'listjobs':
             # GET RUNNING JOBS
-            print(get_running_jobs())
+            print("Running Jobs: {}".format(get_running_jobs()))
     else:
         exit(1)
 
