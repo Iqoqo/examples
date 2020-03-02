@@ -14,4 +14,6 @@ print("Current Time =", current_time)
 #this show you how can you run a custom library script
 os.system("wget -P ./run-result " + input)
 
-#the content inside the run-result will be downloaded back
+#Any files that are copied to the ./run-result folder are automatically picked up by dis.co agent, 
+#and would allow you to download them as dis.co results later on in any of the client libraries, 
+#or the Web UI.the content inside the run-result will be downloaded back as a zip file.
