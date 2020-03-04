@@ -1,14 +1,14 @@
 import disco
 from disco.core.constants import JobStatus
-import pathlib
 from disco.docker_image import DockerImage
+import pathlib
 import os
 
 #we will timeout if the job ran for over 5 minutes
 #this is up to your application and change it accordingly
 LIVE_TESTS_TIMEOUT_SECONDS = 300
 
-#Please replace with your dis.co username and password here.
+#Please replace these with your dis.co username and password.
 DISCO_EMAIL = 'username@email.com'
 DISCO_PASSWORD = 'password'
 
