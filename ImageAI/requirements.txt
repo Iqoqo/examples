@@ -1,8 +1,9 @@
-tensorflow
-keras==2.1.5
-numpy
-pillow
-scipy
-h5py
-matplotlib
+tensorflow==1.15.2
+keras
+# numpy
+# pillow
+# scipy
+# h5py
+# matplotlib
 opencv-python
+imageai
