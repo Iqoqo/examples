@@ -13,12 +13,19 @@ To test the solution, you have to first setup the docker image on the dis.co acc
 
 Then, you can run the main.py afterwards with the customized features provided in the docker (i.e., using an external library in this case)
 
+Before you start, we recommend that you setup a new virtual environment with Python
+
+```
+python3 -m venv venv
+source venv/bin/activate
+``` 
 
 # How to run
 
 1. Install Dis.co SDK. 
 ```
 pip3 install disco --upgrade
+
 ```
 
 2. Run the docker build script (for the first time only)
@@ -48,4 +55,7 @@ This will prompt a selection on which Docker image to run on. Make sure you sele
 
 5. Check the results.
 We download the result back on the current directory. You should be able to see two new jpg files =)
+
+
+
 
