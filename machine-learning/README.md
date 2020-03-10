@@ -8,3 +8,27 @@ To test 30 hyperparameter configurations on my MacBook Pro it took:
 * 8 minutes and 52 seconds using `discomp.Pool().map`
 
 For a more detailed explanation see https://dis.co/blog/machine-learning-with-disco/
+
+# Launching this example
+
+## Using the dockerfile
+
+You can build and publish the dockerfile from this folder to your dockerhub account.
+
+```
+docker build -t your-username/disco-image -f dockerfile .
+docker push your-username/disco-image:latest
+```
+
+Then set this image as the [default image on disco](https://docs.dis.co/integrations/custom-docker-images).
+
+## Using requirements.txt
+
+To launch locally, utilize a virtualenv, and install the requirements.txt file
+
+```
+virtualenv env
+source env/bin/activate
+pip install -r requirements.txt
+python credit_fraud.py
+```

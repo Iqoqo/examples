@@ -1,0 +1,10 @@
+catboost==0.20.2
+disco==1.25.0
+discomp==1.6.2
+lightgbm==2.3.1
+numpy==1.16.1
+pandas==0.25.3
+scikit-learn==0.22
+scipy==1.4.0
+tqdm==4.41.0
+xgboost==0.90
