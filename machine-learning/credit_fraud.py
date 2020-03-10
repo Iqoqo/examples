@@ -6,6 +6,8 @@ To test 30 hyperparameter configurations on my MacBook Pro it took:
 * 81 minutes and 30 seconds using `map`
 * 34 minutes and 40 seconds using `multiprocessing.Pool().map`
 * 8 minutes and 52 seconds using `discomp.Pool().map`
+
+More background at https://dis.co/blog/machine-learning-with-disco/
 """
 
 import os
@@ -77,6 +79,8 @@ print("distributing tests")
 # For purely local `multiprocessing`, replace the `discomp` line with the following.
 # with multiprocessing.Pool() as pool:
 with discomp.Pool() as pool:
+    # `discomp.Pool().map` will send the `test_fit` to multiple machines to run in parallel.
+    # The amount of machines depends on the number of items in the `param_options` list.
     results = pool.map(test_fit, param_options)
 
     # For a serial example, replace the above two lines with the following.
