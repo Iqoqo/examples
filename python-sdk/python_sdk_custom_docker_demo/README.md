@@ -1,61 +1,61 @@
-# Example code for Running Dis.co's Python SDK with Custom Docker Images
+# Running Dis.co's Python SDK with Custom Docker Images
 
-This code demonstrate how we can run a job with Dis.co's Python SDK + a custom docker image.
+This example code demonstrates how to use Dis.co's Python SDK + a custom docker image.
 
-The code got two parts.
+The example code consists of two parts.
 
-1. The Dis.co SDK demo code
-2. The custom docker build files and scripts
+1. The source code 
+	- main.py - Python SDK usage code
+	- server.py - Server side Python script 
+	- task[1-2].txt - Data(task) files
+2. The custom docker build files and scripts to build such. 
 
-To build the docker image, you can run the script provided.
-
-To test the solution, you have to first setup the docker image on the dis.co account, and set it as the default. 
-
-Then, you can run the main.py afterwards with the customized features provided in the docker (i.e., using an external library in this case)
+# Install
 
 Before you start, we recommend that you setup a new virtual environment with Python
 
 ```
-python3 -m venv venv
+#create the virtual environment
+python3 -m venv venv 
+#activate the virtual environment
 source venv/bin/activate
 ``` 
 
-# How to run
+Then, install Dis.co's Python SDK + CLI with the following command line.
 
-1. Install Dis.co SDK. 
 ```
 pip3 install disco --upgrade
-
 ```
 
-2. Run the docker build script (for the first time only)
-```
-./build_docker.sh
-```
-3. Upload and Setup the Docker Image on Dis.co 
+# Usage
 
+1. Run the docker build script (for the first time only)
 
-Follow the instruction here, and push your docker image up according.
-```
-https://docs.docker.com/docker-hub/repos/
-```
+	```
+	./build_docker.sh
+	```
 
-And follow the instruction here to get your docker image setup on Dis.co
+2. Upload and Setup the Docker Image on Dis.co 
 
-```
-https://docs.dis.co/integrations/custom-docker-images
-```
+	Follow the instruction here, and push your docker image up according.
+	```
+	https://docs.docker.com/docker-hub/repos/
+	```
 
-4. Run the Job
-```
-python3 main.py
-```
+	And follow the instruction here to get your docker image setup on Dis.co
 
-This will prompt a selection on which Docker image to run on. Make sure you select the correct one or it won't run.
+	```
+	https://docs.dis.co/integrations/custom-docker-images
+	```
 
-5. Check the results.
-We download the result back on the current directory. You should be able to see two new jpg files =)
+3. Run the Job
 
+	```
+	python3 main.py
+	```
 
+	This will prompt a selection on which Docker image to run on. Make sure you select the correct one or it won't run.
 
+4. Check the results.
 
+	The code downloads the result back on the current directory. You should be able to see two new jpg files on your local current directory. 
