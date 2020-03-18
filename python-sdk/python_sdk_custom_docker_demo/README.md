@@ -13,48 +13,56 @@ To test the solution, you have to first setup the docker image on the dis.co acc
 
 Then, you can run the main.py afterwards with the customized features provided in the docker (i.e., using an external library in this case)
 
+# Install
+
 Before you start, we recommend that you setup a new virtual environment with Python
 
 ```
-python3 -m venv venv
+#create the virtual environment
+python3 -m venv venv 
+#activate the virtual environment
 source venv/bin/activate
 ``` 
 
-# How to run
+Then, install Dis.co SDK with the following command line.
 
-1. Install Dis.co SDK. 
 ```
 pip3 install disco --upgrade
 
 ```
 
-2. Run the docker build script (for the first time only)
-```
-./build_docker.sh
-```
-3. Upload and Setup the Docker Image on Dis.co 
+# Usage
 
+1. Run the docker build script (for the first time only)
 
-Follow the instruction here, and push your docker image up according.
-```
-https://docs.docker.com/docker-hub/repos/
-```
+	```
+	./build_docker.sh
+	```
 
-And follow the instruction here to get your docker image setup on Dis.co
+2. Upload and Setup the Docker Image on Dis.co 
 
-```
-https://docs.dis.co/integrations/custom-docker-images
-```
+	Follow the instruction here, and push your docker image up according.
+	```
+	https://docs.docker.com/docker-hub/repos/
+	```
 
-4. Run the Job
-```
-python3 main.py
-```
+	And follow the instruction here to get your docker image setup on Dis.co
 
-This will prompt a selection on which Docker image to run on. Make sure you select the correct one or it won't run.
+	```
+	https://docs.dis.co/integrations/custom-docker-images
+	```
 
-5. Check the results.
-We download the result back on the current directory. You should be able to see two new jpg files =)
+3. Run the Job
+
+	```
+	python3 main.py
+	```
+
+	This will prompt a selection on which Docker image to run on. Make sure you select the correct one or it won't run.
+
+4. Check the results.
+
+	We download the result back on the current directory. You should be able to see two new jpg files =)
 
 
 
