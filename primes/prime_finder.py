@@ -15,8 +15,6 @@ from itertools import count, islice
 
 outputfile = open("output.txt", "w")
 
-print(sys.argv[1])
-
 def isPrime(n):
     return n > 1 and all(n%i for i in islice(count(2), int(sqrt(n)-1)))
 
@@ -25,6 +23,12 @@ with open(sys.argv[1], 'r') as file:
     splitted = line.split(' ')
     startRange = int(splitted[0])
     endRange = int(splitted[1])
+
+    print(f"Data file: {sys.argv[1]}\n")
+    print(f"Primes between {startRange} to {endRange}:\n")
+    outputfile.write(f"Data file: {sys.argv[1]}\n")
+    outputfile.write(f"Primes between {startRange} to {endRange}:\n")
+
     for i in range(startRange, endRange):
         if isPrime(i):
             outputfile.write(str(i) + " is a prime!\n")
