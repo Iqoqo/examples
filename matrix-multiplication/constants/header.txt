@@ -1,0 +1,4 @@
+=======================================================================
+Calculation: Take each element of a two-dimensional array, 
+multiply it by a given number, then raise the product to a given power.
+=======================================================================
